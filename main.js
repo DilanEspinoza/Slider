@@ -1,18 +1,31 @@
-const image = document.querySelector("img");
-const arrowLeft = document.getElementById("arrow-left");
-const arrowRight = document.getElementById("arrow-right");
+function slider() {
+  let numberImage = 1;
 
-let numeroImage = 1;
-arrowRight.addEventListener("click", () => {
-  image.setAttribute(
-    "src",
-    `images/image-${numeroImage <= 5 ? numeroImage++ : (numeroImage = 1)}.jpg`
-  );
-});
+  let image = document.querySelector("img");
+  image.setAttribute("src", `images/image-${numberImage}.jpg`);
 
-arrowLeft.addEventListener("click", () => {
-  image.setAttribute(
-    "src",
-    `images/image-${numeroImage > 1 ? --numeroImage : (numeroImage = 5)}.jpg`
-  );
-});
+  let $arrowLeft = document.getElementById("arrow-left");
+  let $arrowRight = document.getElementById("arrow-right");
+
+  $arrowLeft.style.display = "none";
+
+  $arrowRight.addEventListener("click", () => {
+    ++numberImage;
+    image.setAttribute("src", `images/image-${numberImage}.jpg`);
+    $arrowLeft.style.display = "block";
+    if (numberImage === 5) {
+      $arrowRight.style.display = "none";
+    }
+  });
+
+  $arrowLeft.addEventListener("click", () => {
+    --numberImage;
+    image.setAttribute("src", `images/image-${numberImage}.jpg`);
+    $arrowRight.style.display = "block";
+    if (numberImage === 1) {
+      $arrowLeft.style.display = "none";
+    }
+  });
+}
+
+slider();
